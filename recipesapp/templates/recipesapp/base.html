@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+    <style>
+        body{
+            background-image: url("{% static 'img/backgr1.png' %}");
+            opacity: 0.8;
+        }
+    </style>
+    <title>{% block title %}Title{% endblock %}</title>
+</head>
+<body>
+
+<header>
+    <div class="fixed-container">
+        <div class="main-image">
+            <a title="На главную страницу" href="{% url 'recipesapp:index' %}">
+                <img src="{% static 'img/main1.png' %}" alt="main-image" >
+            </a>
+            {%  if request.path != "/"%}
+            <div class="main-image">
+            <a title="На главную страницу" href="{% url 'recipesapp:index' %}">
+                На главную страницу
+            </a>
+            </div>
+        {% endif %}
+        </div>
+
+        {% if user.is_authenticated %}
+            <div>
+                <h2>Добро пожаловать, {{ user.username }}</h2>
+                <p><a href="{% url 'recipesapp:add_recipe' %}">Добавить новый рецепт</a></p>
+            </div>
+            <div>
+                <a href="{% url 'recipesapp:user_logout' %}" title="Выйти из профиля">
+                    <img src="{% static 'img/logOut1.png' %}" alt="log-out" width="72px">
+                </a>
+            <p class="center">LogOut</p>
+            </div>
+        {% else %}
+            <div>
+                <a href="{% url 'recipesapp:user_login' %}" title="Войти" >
+                    <img src="{% static 'img/logIn.png' %}" alt="log-in" width="72px">
+                </a>
+            <p class="center">LogIn</p>
+            </div>
+        {% endif %}
+    </div>
+
+</header>
+
+{% block main %}
+    <section class="main_block">
+        <div class="fixed-container">
+            <p>Информация скоро загрузится.</p>
+        </div>
+    </section>
+{% endblock %}
+
+<footer>
+    <div class="fixed-container">
+        &#64 2024 Итоговый проект &nbsp; <a href="#" class= 'a-foot' title="О сайте"> "Сайт рецептов"</a>
+    </div>
+</footer>
+</body>
+</html>

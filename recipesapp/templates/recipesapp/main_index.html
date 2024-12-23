@@ -1,0 +1,29 @@
+{% extends 'recipesapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Main Page
+{% endblock %}
+{% block main %}
+    <section class="main_block">
+        <div class="fixed-container">
+            <h1>Книга Рецептов </h1>
+            <div class="recipes-short">
+                {% for recipe in recipes %}
+                    <a href="{% url 'recipesapp:detail_recipe' pk=recipe.pk %}">
+                        <h2>{{ recipe.name }}</h2>
+                        <br>
+                        {% if not recipe.image %}
+                            <img src="{% static 'img/default_img.png' %}" alt="img" height="120px">
+                            {% else %}
+                            <img src="{{ recipe.image.url }}" alt="img" height="120px">
+                        {% endif %}
+                        <br>
+                        <br>
+                        <p>{{ recipe.description }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

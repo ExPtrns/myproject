@@ -1,0 +1,17 @@
+{% extends 'recipesapp/base.html' %}
+{% load static %}
+
+{% block title %}Вход{% endblock %}
+
+{% block main %}
+    <section class="main_block">
+            <form class="login-form" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <div class="center">
+                    <input class="btn" type="submit" value="Войти">
+                    <a class="btn" href="{% url 'recipesapp:registration' %}">Регистрация</a>
+                </div>
+            </form>
+    </section>
+{% endblock %}

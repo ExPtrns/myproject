@@ -1,0 +1,26 @@
+{% extends 'recipesapp/base.html' %}
+{% load static %}
+
+{% block title %}{{ recipe.recipe_name }}{% endblock %}
+{% block main %}
+    <section class="main_block">
+        <div class="detail-recipe">
+            <div>
+                <h1 class ="field-forms">{{ recipe.name }} (Автор: {{ recipe.author }})</h1>
+                <p class ="field-forms height2x">Описание рецепта - {{ recipe.description }}</p>
+                <p class ="field-forms height2x">Шаги приготовленияя - {{ recipe.steps }}</p>
+                <p class ="field-forms">Время приготовления - {{ recipe.cooking_time }} мин.</p>
+                <div>
+                    <img src="{% static 'img/default_img.png' %}" alt="img" height="120px" class="detail-image">
+                </div>
+            </div>
+            {% if user %}
+                {% if user.username == recipe.author%}
+                    <div class="center">
+                        <a href="{% url 'recipesapp:edit_recipe' recipe.pk %}" class="btn">Редактировать рецепт</a>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

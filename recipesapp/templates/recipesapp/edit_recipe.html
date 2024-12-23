@@ -1,0 +1,17 @@
+{% extends 'recipesapp/base.html' %}
+{% load static %}
+
+{% block title %}Редакитровать {{ recipe.recipe_name }}{% endblock %}
+{% block main %}
+    <section class="main_block">
+        <div class="fixed-container">
+            <h1>Редактировать рецепт</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Сохранить изменения</button>
+            </form>
+           </div>
+        </div>
+    </section>
+{% endblock %}
